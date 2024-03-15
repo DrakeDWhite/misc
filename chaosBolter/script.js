@@ -1,6 +1,15 @@
 const form = document.getElementById('chaosBolterForm');
 
-
+var dmgTypes = {
+    1: "Acid",
+    2: "Cold",
+    3: "Fire",
+    4: "Force",
+    5: "Lightning",
+    6: "Poison",
+    7: "Psychic",
+    8: "Thunder"
+}
 
 function rollD6() {
     return Math.ceil(Math.random() * 6);
@@ -40,16 +49,25 @@ function onSubmit(e) {
     for (let i = 0; i < level; i++) {
         // console.log(rollD6());
         thisD6 = rollD6();
-        console.log("This D6:", thisD6);
+        // console.log("This D6:", thisD6);
         dmg += thisD6;
-        console.log("dmg: ", dmg)
+        // console.log("dmg: ", dmg)
     }
 
-    console.log("Final Dmg: ", dmg)
+    // uncomment to see final damage
+    // console.log("Final Dmg: ", dmg)
 
     // some testing
     // console.log(typeof(parseInt(level)));
     // console.log(parseInt(level));
+
+    outputHTML = "<p>You did <strong>" + dmg + " " + dmgTypes[firstD8] + "</strong> damage!</p>"
+
+    if (firstD8 == secondD8) {
+        outputHTML += "<p> Your chaos bolt arcs to a new enemy! Hit roll again and pick a new target within 30 feet!"
+    }
+
+    document.getElementById('output').innerHTML = outputHTML
 }
 
 // console.log(rollD6())
